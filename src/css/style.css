@@ -1,0 +1,49 @@
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #EAEAE3;
+  color: #001219;
+  line-height: 1.6;
+}
+
+header, footer {
+  background-color: #005F73;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+}
+
+main {
+  padding: 2rem;
+}
+
+.search-section {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+#searchInput {
+  padding: 0.5rem;
+  width: 250px;
+  font-size: 1rem;
+}
+
+#searchButton {
+  padding: 0.5rem 1rem;
+  margin-left: 0.5rem;
+  background-color: #005F73;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#searchButton:hover {
+  background-color: #003845;
+}
