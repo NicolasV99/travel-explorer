@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Travel Explorer</title>
   <link rel="stylesheet" href="./src/css/style.css" />
+  <link rel="icon" href="./src/images/javascript.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@600&display=swap" rel="stylesheet">
+
 </head>
 <body>
   <header>
@@ -13,11 +16,23 @@
 
   <main>
     <section class="search-section">
-      <input type="text" id="searchInput" placeholder="Enter a country or city..." />
-      <button id="searchButton">Search</button>
+      <label for="searchInput" class="visually-hidden">Search country or city</label>
+      <input type="text" id="searchInput" placeholder="Enter a country or city..." aria-label="Search input" />
+      <button class="btn" id="searchButton" aria-label="Search">Search</button>
     </section>
 
-    <section id="results"></section>
+    <div class="results-wrapper">
+      <div class="info-section">
+        <!-- Info del país (flag, capital, etc.) -->
+      </div>
+      <div class="weather-section">
+        <!-- Info del clima -->
+      </div>
+    </div>
+    
+    <div class="image-gallery">
+      <!-- Galería de imágenes -->
+    </div>
   </main>
 
   <footer>

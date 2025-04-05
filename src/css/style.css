@@ -12,7 +12,17 @@ body {
   line-height: 1.6;
 }
 
-header, footer {
+h1, h2, h3{
+  font-family: 'Poppins';
+}
+
+.btn{
+  font-family: 'Poppins';
+  text-transform: uppercase;
+}
+
+header,
+footer {
   background-color: #005F73;
   color: #fff;
   text-align: center;
@@ -23,6 +33,7 @@ main {
   padding: 2rem;
 }
 
+/* Buscador */
 .search-section {
   text-align: center;
   margin-bottom: 2rem;
@@ -32,6 +43,8 @@ main {
   padding: 0.5rem;
   width: 250px;
   font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 #searchButton {
@@ -40,10 +53,78 @@ main {
   background-color: #005F73;
   color: white;
   border: none;
+  border-radius: 4px;
   cursor: pointer;
   transition: background 0.3s ease;
 }
 
 #searchButton:hover {
   background-color: #003845;
+}
+
+/* Contenedor principal del resultado */
+.results-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.info-section,
+.weather-section {
+  background-color: #f3f3f3;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+}
+
+.country-card {
+  text-align: center;
+}
+
+.flag {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.weather-card {
+  text-align: center;
+}
+
+.image-gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.image-gallery img {
+  width: 100%;
+  border-radius: 6px;
+  object-fit: cover;
+  height: 200px;
+}
+
+/* --- Desktop View --- */
+@media (min-width: 768px) {
+  .results-wrapper {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .info-section,
+  .weather-section {
+    flex: 1;
+  }
+
+  .info-section {
+    margin-right: 2rem;
+  }
+
+  .image-gallery {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
 }
