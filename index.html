@@ -1,44 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Travel Explorer</title>
-  <link rel="stylesheet" href="./src/css/style.css" />
-  <link rel="icon" href="./src/images/javascript.svg" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@600&display=swap" rel="stylesheet">
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travel Explorer</title>
+    <link rel="stylesheet" href="./src/css/style.css" />
+    <link rel="icon" href="./src/images/javascript.svg" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <h1>Travel Explorer</h1>
-  </header>
+    <header>
+        <h1>Travel Explorer</h1>
+        <button class="btn" id="darkModeToggle" aria-label="Toggle Dark Mode">Dark Mode</button>
+    </header>
 
-  <main>
-    <section class="search-section">
-      <label for="searchInput" class="visually-hidden">Search country or city</label>
-      <input type="text" id="searchInput" placeholder="Enter a country or city..." aria-label="Search input" />
-      <button class="btn" id="searchButton" aria-label="Search">Search</button>
-    </section>
+    <main>
+        <section class="search-section">
+            <label for="searchInput" class="visually-hidden">Search country or city</label>
+            <input type="text" id="searchInput" placeholder="Enter a country or city..." aria-label="Search input" />
+            <button class="btn" id="searchButton" aria-label="Search">Search</button>
+        </section>
 
-    <div class="results-wrapper">
-      <div class="info-section">
-        <!-- Info del país (flag, capital, etc.) -->
-      </div>
-      <div class="weather-section">
-        <!-- Info del clima -->
-      </div>
-    </div>
-    
-    <div class="image-gallery">
-      <!-- Galería de imágenes -->
-    </div>
-  </main>
+        <div class="results-wrapper">
+            <div class="info-section">
+                </div>
+            <div class="weather-section">
+                </div>
+        </div>
 
-  <footer>
-    <p>&copy; 2025 Travel Explorer</p>
-  </footer>
+        <div class="image-gallery">
+            </div>
 
-  <script type="module" src="./src/js/main.js"></script>
+        <section id="favorites-section" style="display: none;">
+            <h2>Favorites</h2>
+            <ul id="favorites-list">
+                </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Travel Explorer</p>
+    </footer>
+
+    <script type="module" src="./src/js/main.js"></script>
 </body>
 </html>
