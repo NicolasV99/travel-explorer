@@ -1,7 +1,6 @@
 const OPENWEATHER_API_KEY = '815fbb06782bb6c9f36fd4a8ca6dc311';
 const UNSPLASH_ACCESS_KEY = 'KZQd2EHu-veoSnHonHuDP1rRq1YOIp66TnlXuskROjw';
 
-// Elementos del DOM
 const searchInput = document.getElementById("searchInput");
 const searchButton = document.getElementById("searchButton");
 const infoSection = document.querySelector(".info-section");
@@ -11,12 +10,18 @@ const darkModeToggle = document.getElementById('darkModeToggle');
 const body = document.body;
 const favoritesSection = document.getElementById('favorites-section');
 const favoritesList = document.getElementById('favorites-list');
+const popularDestinationsSection = document.querySelector('.popular-destinations');
+const destinationsGrid = document.querySelector('.destinations-grid');
+
 
 const darkModeClass = 'dark-mode-body';
 const localStorageDarkModeKey = 'darkMode';
 const localStorageFavoritesKey = 'favorites';
 
-// --- Funcionalidad Dark Mode ---
+const popularDestinations = ["Paris", "Tokyo", "Machu Picchu", "Bali", "New York City", "Egypt"];
+
+
+// --- Dark Mode Functionality ---
 function enableDarkMode() {
     body.classList.add(darkModeClass);
     localStorage.setItem(localStorageDarkModeKey, 'enabled');
@@ -27,7 +32,7 @@ function disableDarkMode() {
     localStorage.setItem(localStorageDarkModeKey, 'disabled');
 }
 
-// Comprobar la preferencia guardada para el modo oscuro
+// Check preference for dark mode
 if (localStorage.getItem(localStorageDarkModeKey) === 'enabled') {
     enableDarkMode();
 }
@@ -40,7 +45,7 @@ darkModeToggle.addEventListener('click', () => {
     }
 });
 
-// --- Funcionalidad Favoritos ---
+// --- Favorites Functionality ---
 function getFavorites() {
     const favorites = localStorage.getItem(localStorageFavoritesKey);
     return favorites ? JSON.parse(favorites) : [];
@@ -51,7 +56,7 @@ function saveFavorite(countryName) {
     if (!favorites.includes(countryName)) {
         favorites.push(countryName);
         localStorage.setItem(localStorageFavoritesKey, JSON.stringify(favorites));
-        displayFavorites(); // Actualizar la lista visual
+        displayFavorites(); 
         alert(`${countryName} added to favorites!`);
     } else {
         alert(`${countryName} is already in favorites.`);
@@ -62,7 +67,7 @@ function removeFavorite(countryName) {
     let favorites = getFavorites();
     favorites = favorites.filter(fav => fav !== countryName);
     localStorage.setItem(localStorageFavoritesKey, JSON.stringify(favorites));
-    displayFavorites(); // Actualizar la lista visual
+    displayFavorites(); 
     alert(`${countryName} removed from favorites.`);
 }
 
@@ -86,10 +91,12 @@ function displayFavorites() {
     }
 }
 
-// Mostrar favoritos al cargar la página (si la sección está en la misma página)
+// Show Favorites Section to load page
 displayFavorites();
 
-// --- Funciones para Fetch de Datos ---
+
+
+// --- Data Fetch Functions ---
 async function fetchCountryData(country) {
     const url = `https://restcountries.com/v3.1/name/${country}`;
 
@@ -98,7 +105,7 @@ async function fetchCountryData(country) {
         if (!response.ok) throw new Error("Country not found");
 
         const data = await response.json();
-        return data[0]; // Tomamos el primer resultado
+        return data[0]; 
     } catch (error) {
         console.error("Error fetching country data:", error);
         infoSection.innerHTML = `<p style="color: red;">⚠️ Country not found. Try again.</p>`;
@@ -124,6 +131,41 @@ async function fetchWeatherData(city) {
     }
 }
 
+async function fetchImageForDestination(query) {
+    const url = `https://api.unsplash.com/search/photos?query=${query}&per_page=1&client_id=${UNSPLASH_ACCESS_KEY}`;
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`No image found for ${query}`);
+        const data = await response.json();
+        return data.results[0]?.urls?.small;
+    } catch (error) {
+        console.error(`Error fetching image for ${query}:`, error);
+        return null;
+    }
+}
+
+
+// --- Show Popular destines for load page ---
+async function displayPopularDestinations() {
+    if (popularDestinationsSection && destinationsGrid) {
+        destinationsGrid.innerHTML = '';
+        for (const destination of popularDestinations) {
+            const imageUrl = await fetchImageForDestination(destination);
+            if (imageUrl) {
+                const destinationCard = document.createElement('div');
+                destinationCard.classList.add('destination-card');
+                destinationCard.innerHTML = `
+                    <img src="${imageUrl}" alt="${destination}" loading="lazy">
+                    <h3>${destination}</h3>
+                `;
+                destinationsGrid.appendChild(destinationCard);
+            }
+        }
+    }
+}
+
+displayPopularDestinations();
+
 async function fetchCountryImages(query) {
     const url = `https://api.unsplash.com/search/photos?query=${query}&per_page=5&client_id=${UNSPLASH_ACCESS_KEY}`;
 
@@ -132,7 +174,7 @@ async function fetchCountryImages(query) {
         if (!response.ok) throw new Error("No images found");
 
         const data = await response.json();
-        return data.results; // lista de imágenes
+        return data.results; 
     } catch (error) {
         console.error("Error fetching images:", error);
         gallerySection.innerHTML = `<p style="color: red;">⚠️ No images found for ${query}.</p>`;
@@ -140,7 +182,7 @@ async function fetchCountryImages(query) {
     }
 }
 
-// --- Evento del Botón de Búsqueda ---
+// ---  Search Button Event ---
 searchButton.addEventListener("click", async () => {
     const input = searchInput.value.trim();
 
@@ -148,6 +190,10 @@ searchButton.addEventListener("click", async () => {
         infoSection.innerHTML = `<p>Loading info for <strong>${input}</strong>...</p>`;
         weatherSection.innerHTML = "";
         gallerySection.innerHTML = "";
+
+        // Remover la clase 'loaded' antes de la nueva búsqueda
+        infoSection.classList.remove('loaded');
+        weatherSection.classList.remove('loaded');
 
         const countryData = await fetchCountryData(input);
 
@@ -198,6 +244,10 @@ searchButton.addEventListener("click", async () => {
             } else {
                 gallerySection.innerHTML = `<p style="color: orange;">⚠️ No images found for ${countryData.name.common}.</p>`;
             }
+
+            // Añadir la clase 'loaded' después de cargar los datos
+            infoSection.classList.add('loaded');
+            weatherSection.classList.add('loaded');
 
         }
     }

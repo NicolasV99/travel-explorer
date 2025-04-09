@@ -98,11 +98,11 @@ main {
 
 #searchInput {
   padding: 0.5rem;
-  width: 250px;
+  width: 100%;
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
-  color: inherit; /* Hereda el color del body */
+  color: inherit; 
   background-color: var(--secondary-bg);
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
@@ -122,6 +122,7 @@ main {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-top: 10px;
 }
 
 #searchButton:hover {
@@ -152,7 +153,16 @@ main {
   border-radius: 8px;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
-  color: inherit; /* Hereda el color del body */
+  color: inherit;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.info-section.loaded,
+.weather-section.loaded {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; 
 }
 
 .dark-mode-body .info-section,
@@ -178,6 +188,22 @@ main {
   text-align: center;
 }
 
+.country-card,
+.weather-card {
+    background-color: var(--secondary-bg);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease, transform 0.2s ease-in-out; /* Añadimos transición de transformación */
+    color: inherit;
+}
+
+.country-card:hover,
+.weather-card:hover {
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+}
+
 .image-gallery {
   display: grid;
   grid-template-columns: 1fr;
@@ -189,12 +215,90 @@ main {
   border-radius: 6px;
   object-fit: cover;
   height: 200px;
-  transition: opacity 0.5s ease;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
 }
 
 .image-gallery img.loaded {
   opacity: 1;
 }
+
+/*Destinations Section*/
+.popular-destinations {
+  text-align: center;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: var(--secondary-bg);
+  border-radius: 8px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  color: inherit;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+  overflow-x: auto; 
+}
+
+.dark-mode-body .popular-destinations {
+  background-color: var(--dark-secondary-bg);
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.1);
+  color: var(--dark-text);
+}
+
+.destinations-grid {
+  display: flex; 
+  flex-direction: row;
+  gap: 1rem;
+  margin-top: 1rem;
+  white-space: nowrap; 
+  overflow-x: auto; 
+  scroll-snap-type: x mandatory; 
+  scroll-padding-left: 1rem;
+  scroll-padding-right: 1rem;
+}
+
+.destination-card {
+  text-align: center;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: box-shadow 0.3s ease;
+  flex: 0 0 auto; 
+  width: 200px; /
+  scroll-snap-align: start;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease, transform 0.2s ease-in-out; /* Añadimos transición de transformación */
+  color: inherit;
+}
+
+.dark-mode-body .destination-card {
+  background-color: #333;
+  color: var(--dark-text);
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+.destination-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px); 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+}
+
+.destination-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  display: block;
+}
+
+.destination-card h3 {
+  font-size: 1rem;
+  padding: 0.5rem;
+  margin-bottom: 0;
+}
+
+/* Ocultar controles de paginación en mobile */
+.pagination-controls {
+  display: none;
+}
+
 
 /* Botón de Favoritos */
 .fav-btn {
@@ -242,6 +346,7 @@ main {
 
 #favorites-section h2 {
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 #favorites-list {
@@ -250,6 +355,9 @@ main {
 }
 
 #favorites-list li {
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
   padding: 0.5rem 0;
   border-bottom: 1px solid #ccc;
 }
@@ -264,6 +372,11 @@ main {
 
 /* --- Desktop View --- */
 @media (min-width: 768px) {
+  
+  #searchInput {
+    width: 250px;
+  }
+  
   .results-wrapper {
       flex-direction: row;
       justify-content: space-between;
@@ -282,4 +395,31 @@ main {
   .image-gallery {
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
+
+  .popular-destinations {
+    overflow-x: hidden; 
 }
+
+.popular-destinations {
+  overflow-x: visible; 
+}
+
+.destinations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+  gap: 1rem;
+  white-space: normal; 
+  overflow-x: visible; 
+  scroll-snap-type: none; 
+  scroll-padding-left: 0;
+  scroll-padding-right: 0;
+}
+
+.destination-card {
+  width: auto; 
+  flex: 1; 
+  scroll-snap-align: none;
+}
+
+}
+
