@@ -1,4 +1,4 @@
-/* Reset básico */
+/* Reset */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -32,7 +32,7 @@ body.dark-mode-body {
 
 h1, h2, h3 {
   font-family: 'Poppins';
-  color: inherit; /* Hereda el color del body */
+  color: inherit;
 }
 
 #logo {
@@ -62,9 +62,9 @@ h1, h2, h3 {
 }
 
 header{
-  display: flex; /* Convertir el header en un contenedor Flexbox */
-    justify-content: space-between; /* Espaciar el logo y el botón */
-    align-items: center; /* Alinear verticalmente el logo y el botón */
+  display: flex; 
+  justify-content: space-between; 
+    align-items: center;
 }
 
 header,
@@ -78,7 +78,7 @@ footer {
 
 .dark-mode-body header,
 .dark-mode-body footer {
-  background-color: #003845; /* Un tono más oscuro del acento */
+  background-color: #003845; 
   color: var(--dark-text);
 }
 
@@ -101,7 +101,7 @@ main {
   background-color: #f1f1f1;
 }
 
-/* Buscador */
+/* Search Bar */
 .search-section {
   text-align: center;
   margin-bottom: 2rem;
@@ -149,7 +149,6 @@ main {
   background-color: #001d2c;
 }
 
-/* Contenedor principal del resultado */
 .results-wrapper {
   display: flex;
   flex-direction: column;
@@ -210,7 +209,7 @@ main {
     padding: 1rem;
     border-radius: 8px;
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease, transform 0.2s ease-in-out; /* Añadimos transición de transformación */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease, transform 0.2s ease-in-out;
     color: inherit;
 }
 
@@ -281,7 +280,7 @@ main {
   flex: 0 0 auto; 
   width: 200px;
   scroll-snap-align: start;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease, transform 0.2s ease-in-out; /* Añadimos transición de transformación */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease, transform 0.2s ease-in-out;
   color: inherit;
 }
 
@@ -310,13 +309,13 @@ main {
   margin-bottom: 0;
 }
 
-/* Ocultar controles de paginación en mobile */
+/* Hide controls in mobile */
 .pagination-controls {
   display: none;
 }
 
 
-/* Botón de Favoritos */
+/* Favorite button */
 .fav-btn {
   padding: 0.5rem 1rem;
   background-color: var(--accent-color);

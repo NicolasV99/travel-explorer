@@ -47,19 +47,18 @@ if (localStorage.getItem(localStorageDarkModeKey) === 'enabled') {
 darkModeToggle.addEventListener('click', () => {
     if (body.classList.contains(darkModeClass)) {
         disableDarkMode();
-        logo.src = './src/images/te-logo-dark.png'; // Cambiar a logo oscuro
+        logo.src = './src/images/te-logo-dark.png';
     } else {
         enableDarkMode();
-        logo.src = './src/images/te-logo-white.png'; // Cambiar a logo blanco
+        logo.src = './src/images/te-logo-white.png';
     }
 });
 
-// Comprobar la preferencia guardada para el modo oscuro (y establecer el logo inicial)
 if (localStorage.getItem(localStorageDarkModeKey) === 'enabled') {
     enableDarkMode();
-    logo.src = './src/images/te-logo-white.png'; // Logo blanco si el modo oscuro está activado
+    logo.src = './src/images/te-logo-white.png'; 
 } else {
-    logo.src = './src/images/te-logo-dark.png'; // Logo oscuro por defecto
+    logo.src = './src/images/te-logo-dark.png'; 
 }
 
 // --- Favorites Functionality ---
@@ -208,7 +207,6 @@ searchButton.addEventListener("click", async () => {
         weatherSection.innerHTML = "";
         gallerySection.innerHTML = "";
 
-        // Remover la clase 'loaded' antes de la nueva búsqueda
         infoSection.classList.remove('loaded');
         weatherSection.classList.remove('loaded');
 
@@ -231,7 +229,6 @@ searchButton.addEventListener("click", async () => {
                 </div>
             `;
 
-            // Event listener para el botón de favoritos (se añade dinámicamente)
             const favButton = infoSection.querySelector('.fav-btn');
             if (favButton) {
                 favButton.addEventListener('click', function() {
@@ -262,7 +259,6 @@ searchButton.addEventListener("click", async () => {
                 gallerySection.innerHTML = `<p style="color: orange;">⚠️ No images found for ${countryData.name.common}.</p>`;
             }
 
-            // Añadir la clase 'loaded' después de cargar los datos
             infoSection.classList.add('loaded');
             weatherSection.classList.add('loaded');
 
