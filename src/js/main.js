@@ -6,6 +6,7 @@ const searchButton = document.getElementById("searchButton");
 const infoSection = document.querySelector(".info-section");
 const weatherSection = document.querySelector(".weather-section");
 const gallerySection = document.querySelector(".image-gallery");
+const logo = document.getElementById('logo');
 const darkModeToggle = document.getElementById('darkModeToggle');
 const body = document.body;
 const favoritesSection = document.getElementById('favorites-section');
@@ -14,12 +15,18 @@ const popularDestinationsSection = document.querySelector('.popular-destinations
 const destinationsGrid = document.querySelector('.destinations-grid');
 
 
+
 const darkModeClass = 'dark-mode-body';
 const localStorageDarkModeKey = 'darkMode';
 const localStorageFavoritesKey = 'favorites';
 
 const popularDestinations = ["Paris", "Tokyo", "Machu Picchu", "Bali", "New York City", "Egypt"];
 
+
+// Update the current year
+const currentYearElement = document.getElementById('currentYear');
+const currentYear = new Date().getFullYear();
+currentYearElement.textContent = currentYear;
 
 // --- Dark Mode Functionality ---
 function enableDarkMode() {
@@ -40,10 +47,20 @@ if (localStorage.getItem(localStorageDarkModeKey) === 'enabled') {
 darkModeToggle.addEventListener('click', () => {
     if (body.classList.contains(darkModeClass)) {
         disableDarkMode();
+        logo.src = './src/images/te-logo-dark.png'; // Cambiar a logo oscuro
     } else {
         enableDarkMode();
+        logo.src = './src/images/te-logo-white.png'; // Cambiar a logo blanco
     }
 });
+
+// Comprobar la preferencia guardada para el modo oscuro (y establecer el logo inicial)
+if (localStorage.getItem(localStorageDarkModeKey) === 'enabled') {
+    enableDarkMode();
+    logo.src = './src/images/te-logo-white.png'; // Logo blanco si el modo oscuro está activado
+} else {
+    logo.src = './src/images/te-logo-dark.png'; // Logo oscuro por defecto
+}
 
 // --- Favorites Functionality ---
 function getFavorites() {

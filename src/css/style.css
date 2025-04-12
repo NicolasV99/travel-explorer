@@ -35,6 +35,11 @@ h1, h2, h3 {
   color: inherit; /* Hereda el color del body */
 }
 
+#logo {
+  height: 50px; 
+  margin-right: 1rem; 
+}
+
 .btn {
   font-family: 'Poppins';
   text-transform: uppercase;
@@ -54,6 +59,12 @@ h1, h2, h3 {
 
 .dark-mode-body .btn:hover{
   background-color: #001d2c;
+}
+
+header{
+  display: flex; /* Convertir el header en un contenedor Flexbox */
+    justify-content: space-between; /* Espaciar el logo y el botón */
+    align-items: center; /* Alinear verticalmente el logo y el botón */
 }
 
 header,
@@ -176,6 +187,11 @@ main {
   text-align: center;
 }
 
+.dark-mode-body .country-card, .dark-mode-body .weather-section{
+  color: #000;
+}
+
+
 .flag {
   width: 100%;
   max-width: 200px;
@@ -263,7 +279,7 @@ main {
   background-color: #fff;
   transition: box-shadow 0.3s ease;
   flex: 0 0 auto; 
-  width: 200px; /
+  width: 200px;
   scroll-snap-align: start;
   transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease, transform 0.2s ease-in-out; /* Añadimos transición de transformación */
   color: inherit;
@@ -373,6 +389,11 @@ main {
 /* --- Desktop View --- */
 @media (min-width: 768px) {
   
+  #logo {
+    height: 80px; 
+    margin-right: 1rem; 
+  }
+
   #searchInput {
     width: 250px;
   }
